@@ -1,0 +1,33 @@
+@import 'Foundation.scss';
+@import 'Loader.scss';
+
+.row {
+  max-width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "futura-pt",sans-serif;
+  text-transform: uppercase;
+}
+
+body {
+  font-family: "proxima nova", sans-serif;
+  ul {
+    list-style-type: none !important;
+  }
+}
+
+@media (min-width: 40em) {
+  .row {
+    padding-right: 15px;
+  }
+}
+
+.body-wrap {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.body-wrap-ready {
+  opacity: 1;
+}
