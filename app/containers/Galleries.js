@@ -36,9 +36,21 @@ class Galleries extends Component {
       );
     }
 
+    const relevantPaths = ['portfolio', 'work', 'series'];
+    const currentPath = this.props.route.path && this.props.route.path.replace(/\//g, '');
+
+    function filterPredicate (gallArr) {
+      if (relevantPaths.indexOf(currentPath) !== -1)
+        return gallArr.galleryType.toLowerCase() === currentPath;
+
+      return true;
+    }
+
     return (
       <div className='row'>
-        {galleries.items.map((gallery, i) => {
+        {galleries.items
+          .filter(filterPredicate)
+          .map((gallery, i) => {
           return (
             <GalleryCard key={i} {...gallery} />
           );

@@ -12,6 +12,11 @@ import SimplePage from './components/SimplePage';
 export default (
   <Route path='/' component={App}>
     <IndexRoute component={Galleries} />
+
+    <Route path='/work/' component={Galleries} />
+    <Route path='/portfolio/' component={Galleries} />
+    <Route path='/series/' component={Galleries} />
+
     <Route path='/work/:slug' component={Gallery} />
     <Route path='/portfolio/:slug' component={Gallery} />
     <Route path='/series/:slug' component={Gallery} />

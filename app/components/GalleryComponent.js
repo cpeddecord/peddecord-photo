@@ -32,7 +32,7 @@ export default class GalleryComponent extends Component {
       }
       @media (min-width: 40em) {
         & .gallery-description {
-          margin-bottom: 35px;
+          margin-bottom: 95px;
         }
       }
     `
