@@ -1,5 +1,7 @@
 # Peddecord Photo
 
+[ ![Codeship Status for cpeddecord/peddecord-photo](https://codeship.com/projects/998b95b0-a471-0133-ac3c-726ab495672b/status?branch=master)](https://codeship.com/projects/129435)
+
 Decided to create a universal/isomorphic and generally overly-engineered photography portfolio website for myself. Based on [this](https://github.com/DominicTobias/universal-react) lovely starter kit.
 
 ### Tech Stack
