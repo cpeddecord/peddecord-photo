@@ -4,7 +4,7 @@ export const GALLERIES_FETCHED = 'GALLERIES_FETCHED';
 export const GALLERIES_FETCH_FAILED = 'GALLERIES_FETCH_FAILED';
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
-const galleryAPI = isDeveloping ? CONFIG.API.galleries : CONFIG.API.prodGalleries;
+const galleryAPI = isDeveloping ? CONFIG.API.devGalleries : CONFIG.API.prodGalleries;
 
 function fetchGalleries() {
   return (dispatch) => {
