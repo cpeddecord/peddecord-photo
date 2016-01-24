@@ -60,7 +60,7 @@ global.CONFIG = require(envConfigPath).default;
 
 server.get('*', require('./app').serverMiddleware);
 
-server.listen(port, 'localhost', function onStart(err) {
+server.listen(port, function onStart(err) {
   if (err) {
     console.log(err);
   }
@@ -86,11 +86,16 @@ const corsOptions = {
 
 const apiServer = express();
 apiServer.use(morgan('tiny'));
-apiServer.use(cors(corsOptions));
+if (isDeveloping) {
+  apiServer.use(cors());
+} else {
+  apiServer.use(cors(corsOptions));
+}
+
 apiServer.use(express.static(PUBLIC_PATH));
 apiServer.use('/api', require('./api'));
 
-apiServer.listen(9000, 'localhost', function onStart (err) {
+apiServer.listen(9000, function onStart (err) {
   if (err)
     console.log(err);
 

@@ -17,7 +17,7 @@ export default class MainNav extends Component {
     return (`
       & nav {
         height: 50px;
-        border-bottom: 1px solid #d7d7d7;
+        border-bottom: 1px solid #f3f3f3;
       }
       & .heading {
         padding: 10px 15px;

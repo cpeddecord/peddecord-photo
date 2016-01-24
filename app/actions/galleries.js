@@ -24,9 +24,9 @@ function fetchGalleries() {
 function shouldFetchGalleries(state) {
   const { galleries } = state;
 
-  if (!galleries.items ||
-    galleries.readyState === GALLERIES_FETCH_FAILED ||
-    galleries.readyState === GALLERIES_INVALID) {
+  if (!galleries.items
+      || galleries.readyState === GALLERIES_FETCH_FAILED
+      || galleries.readyState === GALLERIES_INVALID) {
     return true;
   }
 

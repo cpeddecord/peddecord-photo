@@ -6,6 +6,9 @@ if (typeof window !== 'undefined' && typeof Typekit !== 'undefined') {
     active () {
       document.getElementById('loader').style.opacity = 0;
       document.getElementById('loader').style.zIndex = -1;
+      setTimeout(() => {
+        document.getElementById('loader').style.width = 0;
+      }, 500)
     }
   });
 }
@@ -30,7 +33,7 @@ class Root extends Component {
 
   renderLoadingSpinner() {
     const spinnerStyle = {
-      'transition': 'all 0.4s',
+      'transition': 'opacity 0.4s',
       'height': '100%',
       'width': '100%',
       'zIndex': '9999',

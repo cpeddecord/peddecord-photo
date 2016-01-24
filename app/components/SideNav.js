@@ -5,10 +5,12 @@ import InlineCss from 'react-inline-css';
 export default class SideNav extends Component {
   static css(isShowing) {
     return(`
+      & ul, & li {
+        list-style-type: none !important;
+      }
       & .side-nav {
         text-align: left;
-        padding-top: 46px;
-        padding-left: 30px;
+        padding-top: 49px;
         display: block;
         background: #fff;
         position: fixed;
@@ -45,21 +47,38 @@ export default class SideNav extends Component {
         top: 8px;
       }
 
+      & .side-nav-wraper {
+        margin-bottom: 0;
+      }
+
       & ul {
         margin-left: 0;
       }
 
       & li.section {
-        padding-bottom: 20px;
+        border-bottom: 1px solid #f3f3f3;
       }
 
-      .sub-section li {
-        padding-bottom: 10px;
+      & .section-heading {
+        color: #a0a0a0;
+        display: block;
       }
 
-      .section-heading {
-        padding-bottom: 10px;
-        display: block
+      & .section-heading, .sub-section li {
+        padding: 10px 0 10px 25px;
+      }
+
+      & .section-heading:hover, & .sub-section li:hover {
+        background-color: #f3f3f3;
+      }
+
+      & a.section-heading {
+        color: #222;
+      }
+
+      & a.active {
+        background-color: #eee;
+        color: tomato;
       }
     `);
   }
@@ -72,10 +91,10 @@ export default class SideNav extends Component {
         <div onClick={showNav} className='side-nav-overlay'>
           <nav className='side-nav'>
             <button className='side-nav-close' onClick={showNav}>X</button>
-            <ul>
+            <ul className='side-nav-wraper'>
 
               <li className='section'>
-                <span className='section-heading'>Portfolio</span>
+                <Link to='/portfolio' activeClassName='active' className='section-heading'>Portfolio</Link>
                 <ul className='sub-section'>
                   <li>Studio</li>
                   <li>Documentary</li>
@@ -85,7 +104,7 @@ export default class SideNav extends Component {
               </li>
 
               <li className='section'>
-                <span className='section-heading'>Work</span>
+                <Link to='/work' activeClassName='active' className='section-heading'>Work</Link>
                 <ul className='sub-section'>
                   <li>Odyssey/Sojourn</li>
                   <li>New Series</li>

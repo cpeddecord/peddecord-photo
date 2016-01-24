@@ -6,8 +6,8 @@ export default class Footer extends Component {
   static css () {
     return (`
       &.das-footer {
-        padding: 10px;
-        border-top: 1px solid #d7d7d7;
+        padding: 15px;
+        border-top: 1px solid #f3f3f3;
         font-size: 12px;
         color: #a0a0a0;
         position: absolute;
