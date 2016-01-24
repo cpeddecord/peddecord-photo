@@ -6,6 +6,8 @@ if (typeof window !== 'undefined' && typeof Typekit !== 'undefined') {
     active () {
       document.getElementById('loader').style.opacity = 0;
       document.getElementById('loader').style.zIndex = -1;
+      document.getElementById('loader').style.height = 0;
+      document.getElementById('loader').style.width = 0;
     }
   });
 }
@@ -37,7 +39,7 @@ class Root extends Component {
       'backgroundColor': '#fff',
       'position': 'fixed'
     };
-    
+
     return (
       <div id='loader' style={spinnerStyle}>
         <div className="spinner">
@@ -46,7 +48,7 @@ class Root extends Component {
           <div className="bounce3"></div>
         </div>
       </div>
-  );
+    );
   }
 
   render() {

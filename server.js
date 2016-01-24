@@ -71,10 +71,10 @@ server.listen(port, 'localhost', function onStart(err) {
 const whitelist = [
   'http://peddecordphoto.com',
   'http://peddecordphoto.com:8080',
+  'http://162.243.159.23',
+  'http://162.243.159.23:8080',
   'http://127.0.0.1:3000',
-  'http://127.0.0.1:8080',
   'http://localhost:3000',
-  'http://localhost:8080'
 ];
 
 const corsOptions = {

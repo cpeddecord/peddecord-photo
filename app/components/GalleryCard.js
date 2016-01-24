@@ -6,19 +6,27 @@ import ProgressiveLoadImage from './ProgressiveLoadImage';
 
 
 export default class GalleryCard extends Component {
-  static css () {
+  static css (halfSize) {
     return (`
       &.gallery-card {
         margin-bottom: 25px;
         display: block;
       }
-      &.gallery-card:last-of-type {
-        margin-bottom: 0;
+      @media (max-width: 639px) {
+        &.gallery-card:nth-child(odd) {
+          ${halfSize && 'padding-right: 5px'}
+        }
+        &.gallery-card:nth-child(even) {
+          ${halfSize && 'padding-left: 5px'}
+        }
       }
       @media (min-width: 40em) {
         &.gallery-card {
           padding-top: 15px;
           padding-left: 15px;
+        }
+        &.gallery-card:last-of-type {
+          margin-bottom: 0;
         }
       }
       & .gallery-card-description {
@@ -36,7 +44,7 @@ export default class GalleryCard extends Component {
   }
 
   render() {
-    const { lede, shortLede, galleryType, featuredImage, slug } = this.props;
+    const { lede, shortLede, galleryType, featuredImage, slug, halfSize } = this.props;
 
     const progProps = {
       imgSrc: featuredImage.url,
@@ -46,8 +54,10 @@ export default class GalleryCard extends Component {
       isVertical: false
     };
 
+    const classNames = halfSize ? 'small-6 medium-3 large-2' : 'small-12 medium-6 large-4'
+
     return (
-      <InlineCss className='small-12 medium-6 large-4 gallery-card' stylesheet={GalleryCard.css()}>
+      <InlineCss className={`${classNames} gallery-card`} stylesheet={GalleryCard.css(halfSize)}>
         <Link to={`/${galleryType.toLowerCase()}/${slug}`}>
           <ProgressiveLoadImage {...progProps} />
           <div className='gallery-card-description'>

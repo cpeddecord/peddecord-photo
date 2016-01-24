@@ -5,14 +5,19 @@ import InlineCss from 'react-inline-css';
 export default class Footer extends Component {
   static css () {
     return (`
-      & footer {
+      &.das-footer {
         padding: 10px;
-        height: 50px;
         border-top: 1px solid #d7d7d7;
         font-size: 12px;
-        bottom: 0;
         color: #a0a0a0;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 50px;
         width: 100%;
+      }
+      & footer {
+        position: relative;
       }
   `);
   }
@@ -20,7 +25,7 @@ export default class Footer extends Component {
 
   render() {
     return (
-      <InlineCss stylesheet={Footer.css()}>
+      <InlineCss className='das-footer' stylesheet={Footer.css()}>
         <footer>
           <p>© {new Date().getUTCFullYear()} Christopher Peddecord</p>
         </footer>

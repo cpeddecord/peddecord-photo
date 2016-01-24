@@ -20,9 +20,11 @@ class App extends Component {
             {'name': 'viewport', 'content':'width=device-width, initial-scale=1'}
           ]}
         />
-        <MainNav />
-        <div className='route-content'>
-          {this.props.children}
+        <div className='page-wrapper'>
+          <MainNav />
+          <div className='route-content'>
+            {this.props.children}
+          </div>
         </div>
         <Footer />
       </div>
