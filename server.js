@@ -11,6 +11,7 @@ const webpack = require('webpack');
 const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('./webpack.config.js');
+const compression = require('compression');
 const morgan = require('morgan');
 const cors = require('cors');
 
@@ -20,6 +21,7 @@ const server = express();
 
 global.PUBLIC_PATH = path.resolve(__dirname, 'public');
 
+server.use(compression());
 server.use(morgan('tiny'));
 
 
@@ -92,6 +94,7 @@ if (isDeveloping) {
   apiServer.use(cors(corsOptions));
 }
 
+apiServer.use(compression());
 apiServer.use(express.static(PUBLIC_PATH));
 apiServer.use('/api', require('./api'));
 
