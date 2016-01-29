@@ -5,6 +5,8 @@ import App from './containers/App';
 import NoMatch from './containers/NoMatch';
 import Galleries from './containers/Galleries';
 import Gallery from './containers/Gallery';
+import BlogsContainer from './containers/BlogsContainer';
+import BlogPost from './containers/BlogPost';
 import LoadingIndicator from './components/LoadingIndicator';
 import SimplePage from './components/SimplePage';
 
@@ -20,6 +22,9 @@ export default (
     <Route path='/work/:slug' component={Gallery} />
     <Route path='/portfolio/:slug' component={Gallery} />
     <Route path='/series/:slug' component={Gallery} />
+
+    <Route path='/blog' component={BlogsContainer} />
+    <Route path='/blog/:slug' component={BlogPost} />
 
     <Route path='/loading' component={LoadingIndicator} />
 

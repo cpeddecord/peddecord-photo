@@ -32,6 +32,10 @@ class NoMatch extends Component {
       .forEach(action => action());
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   renderGalleries() {
     const galleries = this.props.galleries;
 
