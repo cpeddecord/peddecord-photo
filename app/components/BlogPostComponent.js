@@ -20,13 +20,20 @@ export default function BlogPostComponent (props) {
   const featuredImage = props.featuredImage.value.main;
   const content = props.body.value;
   const publishDate = new Date(props.publishDate.value);
-  const featuredImageProps = {
+  const mediumImageProps = {
     imgSrc: featuredImage.url,
     alt: featuredImage.alt,
     height: featuredImage.dimensions.height,
     width: featuredImage.dimensions.width,
     isVertical: true
   };
+  const squareImageProps = {
+    imgSrc: props.featuredImage.value.views.square.url,
+    alt: featuredImage.alt,
+    height: props.featuredImage.value.views.square.dimensions.height,
+    width: props.featuredImage.value.views.square.dimensions.width,
+    isVertical: true
+  }
   const gallery = props.gallery && props.gallery.value.map((img) => {
     return {
       url: img.image.value.main.url,
@@ -42,7 +49,13 @@ export default function BlogPostComponent (props) {
         <h5>{shortLede}</h5>
       </div>
 
-      <ProgressiveLoadImage {...featuredImageProps} />
+      <div className='show-for-small-only'>
+        <ProgressiveLoadImage {...squareImageProps} />
+      </div>
+
+      <div className='show-for-medium'>
+        <ProgressiveLoadImage {...mediumImageProps} />
+      </div>
 
       <div className='show-for-medium blog-description'>
         <h1>{lede}</h1>

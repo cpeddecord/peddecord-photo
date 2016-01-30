@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 
+function loaderKill () {
+  document.getElementById('loader').style.opacity = 0;
+  document.getElementById('loader').style.zIndex = -1;
+  setTimeout(() => {
+    document.getElementById('loader').style.width = 0;
+  }, 500);
+}
+
 if (typeof window !== 'undefined' && typeof Typekit !== 'undefined') {
   Typekit.load({
     async: true,
-    active () {
-      document.getElementById('loader').style.opacity = 0;
-      document.getElementById('loader').style.zIndex = -1;
-      setTimeout(() => {
-        document.getElementById('loader').style.width = 0;
-      }, 500)
-    }
+    active: loaderKill,
+    inactive: loaderKill
   });
 }
 
