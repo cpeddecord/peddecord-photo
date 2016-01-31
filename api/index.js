@@ -1,12 +1,12 @@
-var fs = require('fs');
-var path = require('path');
-var router = require('express').Router();
+const fs = require('fs');
+const path = require('path');
+const router = require('express').Router();
 
-var dirTree = require('./directory-tree');
-var dirCereal = require('./directory-serialize');
+const dirTree = require('./directory-tree');
+const dirCereal = require('./directory-serialize');
 
 router.get('*/:resource', function (request, response) {
-  var requestPath = PUBLIC_PATH + '/' + request.params.resource;
+  const requestPath = PUBLIC_PATH + '/' + request.params.resource;
 
   try {
     dirTree(requestPath, dirTreeToSerialize);

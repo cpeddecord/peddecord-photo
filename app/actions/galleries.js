@@ -4,12 +4,13 @@ export const GALLERIES_FETCHED = 'GALLERIES_FETCHED';
 export const GALLERIES_FETCH_FAILED = 'GALLERIES_FETCH_FAILED';
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
+const galleryEndpoint = isDeveloping ? CONFIG.API.devGalleries : CONFIG.API.prodGalleries;
 
 function fetchGalleries() {
   return (dispatch) => {
     dispatch({ type: GALLERIES_FETCHING });
 
-    return fetch(CONFIG.API.prodGalleries)
+    return fetch(galleryEndpoint)
       .then(response => {
         return response.json();
       })

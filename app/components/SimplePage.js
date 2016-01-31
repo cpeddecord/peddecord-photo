@@ -31,7 +31,7 @@ Aliquam vel pharetra felis. Vestibulum facilisis felis velit, vitae pellentesque
         </div>
 
         <div className='small-12 medium-6 epic-hat'>
-          <img src="http://localhost:9000/epichat.jpeg" />
+          <img src="http://localhost:3000/epichat.jpg" />
         </div>
 
         <div style={bodyTextStyle} className='small-12 medium-6 show-for-small-only'>

@@ -66,9 +66,17 @@ server.listen(port, function onStart(err) {
   if (err) {
     console.log(err);
   }
-  console.info('📷  @ %s. Wow.', port);
+  console.info('📷  @ %s. Wow. Very %s.', port, process.env.NODE_ENV || 'development');
 });
 
+
+/**
+ * API SERVER STUFFS
+ */
+
+ const apicache = require('apicache').options({
+   debug: isDeveloping
+ }).middleware;
 
 const whitelist = [
   'http://peddecordphoto.com',
@@ -96,7 +104,7 @@ if (isDeveloping) {
 
 apiServer.use(compression());
 apiServer.use(express.static(PUBLIC_PATH));
-apiServer.use('/api', require('./api'));
+apiServer.use('/api', apicache('24 hours'), require('./api'));
 
 apiServer.listen(9000, function onStart (err) {
   if (err)
