@@ -30,11 +30,9 @@ class Blog extends Component {
       return <LoadingIndicator />;
     }
 
-    if (blog.readyState === BlogActions.BLOG_FETCH_FAILED) {
-      return (
-        <p>Failed to fetch blog</p>
-      );
-    }
+    if (blog.readyState === BlogActions.BLOG_FETCH_FAILED)
+      return <ErrorPage type='blog posts' />
+
 
     return (
       <div className='row'>

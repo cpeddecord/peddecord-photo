@@ -6,6 +6,7 @@ import * as GalleriesActions from '../actions/galleries';
 
 import LoadingIndicator from '../components/LoadingIndicator';
 import GalleryCard from '../components/GalleryCard';
+import ErrorPage from '../components/ErrorPage';
 
 class Galleries extends Component {
 
@@ -30,11 +31,8 @@ class Galleries extends Component {
       return <LoadingIndicator />;
     }
 
-    if (galleries.readyState === GalleriesActions.GALLERIES_FETCH_FAILED) {
-      return (
-        <p>Failed to fetch galleries</p>
-      );
-    }
+    if (galleries.readyState === GalleriesActions.GALLERIES_FETCH_FAILED)
+      return <ErrorPage type='galleries' />
 
     const relevantPaths = ['portfolio', 'work', 'series'];
     const currentPath = this.props.route.path && this.props.route.path.replace(/\//g, '');

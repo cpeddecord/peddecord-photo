@@ -29,11 +29,8 @@ class Gallery extends Component {
       return <LoadingIndicator />;
     }
 
-    if (galleries.readyState === GalleriesActions.GALLERIES_FETCH_FAILED) {
-      return (
-        <p>Failed to fetch galleries</p>
-      );
-    }
+    if (galleries.readyState === GalleriesActions.GALLERIES_FETCH_FAILED)
+      return <ErrorPage type='gallery' />
 
     return (
       <GalleryComponent {...galleryFields} />

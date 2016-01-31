@@ -31,11 +31,8 @@ class BlogPost extends Component {
       return <LoadingIndicator />;
     }
 
-    if (this.props.blog.readyState === BlogActions.GALLERIES_FETCH_FAILED) {
-      return (
-        <p>Failed to fetch galleries</p>
-      );
-    }
+    if (blog.readyState === BlogActions.BLOG_FETCH_FAILED)
+      return <ErrorPage type='this blog post' />
 
     return <BlogPostComponent {...blogPostProps} />
   }
