@@ -64,15 +64,19 @@ export default class SideNav extends Component {
         display: block;
       }
 
-      & .section-heading, .sub-section li {
+      & .section-heading, .sub-section li, .sub-section a {
         padding: 10px 0 10px 25px;
       }
 
-      & .section-heading:hover, & .sub-section li:hover {
+      & .section-heading:hover, & .sub-section li:hover,  & .sub-section a:hover {
         background-color: #f3f3f3;
       }
 
-      & a.section-heading {
+      & .sub-section a {
+        display: list-item;
+      }
+
+      & a.section-heading, & .sub-section a {
         color: #222;
       }
 
@@ -96,20 +100,19 @@ export default class SideNav extends Component {
               <li className='section'>
                 <Link to='/portfolio' activeClassName='active' className='section-heading'>Portfolio</Link>
                 <ul className='sub-section'>
-                  <li>Studio</li>
-                  <li>Documentary</li>
-                  <li>Live</li>
-                  <li>Moving Portraits</li>
+                  <Link to='/portfolio/studio' activeClassName='active'>Studio</Link>
+                  <Link to='/portfolio/moving-portraits' activeClassName='active'>Moving Portraits</Link>
+                  <Link to='/portfolio/documentary' activeClassName='active'>Documentary</Link>
+                  <Link to='/portfolio/live' activeClassName='active'>Live</Link>
                 </ul>
               </li>
 
               <li className='section'>
                 <Link to='/work' activeClassName='active' className='section-heading'>Work</Link>
                 <ul className='sub-section'>
-                  <li>Odyssey/Sojourn</li>
-                  <li>New Series</li>
-                  <li>Aloft</li>
-                  <li>Personal Work I</li>
+                  <Link to='/work/odyssey-sojourn'>Odyssey/Sojourn</Link>
+                  <Link to='/work/new-series'>New Series</Link>
+                  <Link to='/work/aloft-new-dance-project'>Aloft</Link>
                 </ul>
               </li>
 

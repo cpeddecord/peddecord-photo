@@ -9,7 +9,7 @@ import {
 
 export default function blog(state = {
   readyState: BLOG_INVALID,
-  blogPosts: null
+  blogPosts: []
 }, action) {
   switch (action.type) {
 

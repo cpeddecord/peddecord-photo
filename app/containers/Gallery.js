@@ -38,14 +38,24 @@ class Gallery extends Component {
   }
 
   render() {
-    const gallery = this.props.galleries.items.find((galleryArr) => {
+    const { galleries } = this.props;
+
+    if (galleries.readyState === GalleriesActions.GALLERIES_INVALID ||
+      galleries.readyState === GalleriesActions.GALLERIES_FETCHING) {
+      return <LoadingIndicator />;
+    }
+
+    if (galleries.readyState === GalleriesActions.GALLERIES_FETCH_FAILED)
+      return <ErrorPage type='gallery' />
+
+    const gallery = galleries.items.find((galleryArr) => {
       return galleryArr.slug === this.props.routeParams.slug;
     });
 
     return (
       <div>
         <Helmet title={`${gallery.lede} | ${gallery.galleryType}`} />
-        {this.renderGallery(gallery)}
+        <GalleryComponent {...gallery} />
       </div>
     );
   }

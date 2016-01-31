@@ -9,7 +9,7 @@ import {
 
 export default function galleries(state = {
   readyState: GALLERIES_INVALID,
-  items: null
+  items: []
 }, action) {
   switch (action.type) {
 
