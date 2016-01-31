@@ -15,8 +15,11 @@ export default class GalleryComponent extends Component {
       }
       @media (min-width: 40em) {
         & .gallery-description {
-          margin-bottom: 95px;
+          margin-bottom: 43px;
         }
+      }
+      & .content-block{
+        margin-bottom: 80px;
       }
     `
   }
@@ -26,7 +29,7 @@ export default class GalleryComponent extends Component {
   }
 
   render() {
-    const { lede, shortLede, gallery } = this.props;
+    const { lede, shortLede, gallery, content } = this.props;
 
     return (
       <InlineCss stylesheet={GalleryComponent.css()}>
@@ -41,6 +44,8 @@ export default class GalleryComponent extends Component {
           <h1 className='gallery-title'>{lede}</h1>
           <h5 className='gallery-short-lede'>{shortLede}</h5>
         </div>
+
+        <div className='medium-6 medium-offset-3 show-for-medium content-block' dangerouslySetInnerHTML={{__html: content}} />
 
       </InlineCss>
     )
