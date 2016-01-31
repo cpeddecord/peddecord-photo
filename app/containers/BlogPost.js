@@ -31,7 +31,7 @@ class BlogPost extends Component {
       return <LoadingIndicator />;
     }
 
-    if (blog.readyState === BlogActions.BLOG_FETCH_FAILED)
+    if (this.props.blog.readyState === BlogActions.BLOG_FETCH_FAILED)
       return <ErrorPage type='this blog post' />
 
     return <BlogPostComponent {...blogPostProps} />
