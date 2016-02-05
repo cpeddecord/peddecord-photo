@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { Link } from 'react-router';
 import Helmet from 'react-helmet';
 import '../scss/App.scss';
@@ -23,7 +24,16 @@ class App extends Component {
         <div className='page-wrapper'>
           <MainNav />
           <div className='route-content'>
-            {this.props.children}
+            <ReactCSSTransitionGroup
+              component="div"
+              transitionName="page-transition"
+              transitionEnterTimeout={500}
+              transitionLeaveTimeout={500}
+            >
+              {React.cloneElement(this.props.children, {
+                key: this.props.location.pathname
+              })}
+            </ReactCSSTransitionGroup>
           </div>
         </div>
         <Footer />

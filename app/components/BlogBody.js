@@ -32,6 +32,11 @@ function styles () {
   `);
 }
 
+function quoteWithAttributeSlice (props) {
+  console.log(props);
+  return <span />
+}
+
 function imageSlice (props) {
   const progProps = {
     imgSrc: props.img.value.main.url,
@@ -101,12 +106,18 @@ export default function BlogBody (props) {
 
   const contentBody = props.content.map((contentSlice, i) => {
     switch (contentSlice.slice_type) {
+
       case 'text':
         return <section className='text-slice' key={i}>{textSlice(contentSlice.value.value)}</section>
+
       case 'quote':
         return <section className='quote-slice' key={i}>{contentSlice.value.value}</section>
+
       case 'image-with-caption':
         return <section className='image-slice' key={i}>{imageSlice(contentSlice.value.value[0])}</section>
+
+      case 'quote-with-attribution':
+        return <section className='quote-attribution-slice' key={i}>{quoteWithAttributeSlice(contentSlice.value.value[0])}</section>
     }
   });
 

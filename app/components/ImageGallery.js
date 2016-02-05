@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import InlineCss from 'react-inline-css';
 import ProgressiveLoadImage from './ProgressiveLoadImage';
 
@@ -25,37 +25,45 @@ function styles () {
   `);
 }
 
-export default function ImageGallery (props) {
-  const gallery = props.gallery || [];
-  if (!gallery.length) return <div></div>;
+export default class ImageGallery extends Component {
+  componentWillReceiveProps () {
+    document.getElementsByClassName('horizontal-images')[0].scrollLeft = 0;
+  }
 
-  return (
-    <InlineCss stylesheet={styles()} >
-      <div className='vertical-images show-for-small-only'>
-        {gallery.map((imgObj, i) => {
-          const progProps = {
-            imgSrc: imgObj.url,
-            alt: imgObj.description,
-            height: imgObj.dimensions.height,
-            width: imgObj.dimensions.width,
-            isVertical: true
-          };
-          return <ProgressiveLoadImage key={i} {...progProps} />
-        })}
-      </div>
+  render () {
+    const gallery = this.props.gallery || [];
+    if (!gallery.length) return <div />;
 
-      <div className='horizontal-images show-for-medium'>
-        {gallery.map((imgObj, i) => {
-          const progProps = {
-            imgSrc: imgObj.url,
-            alt: imgObj.description,
-            height: imgObj.dimensions.height,
-            width: imgObj.dimensions.width,
-            isVertical: false
-          };
-          return <ProgressiveLoadImage key={i} {...progProps} />
-        })}
-      </div>
-    </InlineCss>
-  );
+    return (
+      <InlineCss stylesheet={styles()} >
+        <div className='vertical-images show-for-small-only'>
+          {gallery.map((imgObj, i) => {
+            const progProps = {
+              imgSrc: imgObj.url,
+              alt: imgObj.description,
+              height: imgObj.dimensions.height,
+              width: imgObj.dimensions.width,
+              isVertical: true
+            };
+            return <ProgressiveLoadImage key={i} {...progProps} />
+          })}
+        </div>
+
+        <div className='horizontal-images show-for-medium'>
+          {gallery.map((imgObj, i) => {
+            const progProps = {
+              imgSrc: imgObj.url,
+              alt: imgObj.description,
+              height: imgObj.dimensions.height,
+              width: imgObj.dimensions.width,
+              isVertical: false
+            };
+            return <ProgressiveLoadImage key={i} {...progProps} />
+          })}
+        </div>
+      </InlineCss>
+    );
+
+  }
+
 }
