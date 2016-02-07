@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import InlineCss from 'react-inline-css';
+import React from 'react';
+import InlineCss from 'react-inline-css'
 
-
-export default class Footer extends Component {
-  static css () {
+export default function Footer () {
+  function footerStyles () {
     return (`
       &.das-footer {
         padding: 15px;
@@ -22,14 +21,11 @@ export default class Footer extends Component {
   `);
   }
 
-
-  render() {
-    return (
-      <InlineCss className='das-footer' stylesheet={Footer.css()}>
-        <footer>
-          <p>© {new Date().getUTCFullYear()} Christopher Peddecord</p>
-        </footer>
-      </InlineCss>
-    )
-  }
+  return (
+    <InlineCss className='das-footer' stylesheet={footerStyles()}>
+      <footer>
+        <p>© {new Date().getUTCFullYear()} Christopher Peddecord</p>
+      </footer>
+    </InlineCss>
+  );
 }

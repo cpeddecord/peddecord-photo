@@ -8,7 +8,7 @@ import Gallery from './containers/Gallery';
 import BlogsContainer from './containers/BlogsContainer';
 import BlogPost from './containers/BlogPost';
 import LoadingIndicator from './components/LoadingIndicator';
-import SimplePage from './components/SimplePage';
+import AboutPage from './components/AboutPage';
 
 
 export default (
@@ -28,7 +28,7 @@ export default (
 
     <Route path='/loading' component={LoadingIndicator} />
 
-    <Route path='/about' component={SimplePage} />
+    <Route path='/about' component={AboutPage} />
     <Route path="*" component={NoMatch} />
   </Route>
 );
