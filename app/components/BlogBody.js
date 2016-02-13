@@ -82,7 +82,7 @@ function paragrapher (sectionText, sectionSpans) {
   }
 
   const spans = sectionSpans.map((span) => {
-    const ogSpan = sectionText.slice(span.start + 1, span.end);
+    const ogSpan = sectionText.slice(span.start, span.end);
     const href = span.type === 'hyperlink'
       ? ` href="${span.data.value.url}" target="_blank"`
       : '';

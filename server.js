@@ -33,6 +33,7 @@ server.get('/favicon.ico', function(req, res) {
 });
 
 server.use(express.static(path.resolve(__dirname, 'dist')));
+server.use(express.static(PUBLIC_PATH));
 
 if (isDeveloping) {
   const compiler = webpack(config);
@@ -59,17 +60,6 @@ if (isDeveloping) {
 const envConfigPath = './app/config/' + (process.env.NODE_ENV || 'local');
 global.CONFIG = require(envConfigPath).default;
 
-
-server.get('*', require('./app').serverMiddleware);
-
-server.listen(port, function onStart(err) {
-  if (err) {
-    console.log(err);
-  }
-  console.info('📷  @ %s. Wow. Very %s.', port, process.env.NODE_ENV || 'development');
-});
-
-
 /**
  * API SERVER STUFFS
  */
@@ -94,21 +84,18 @@ const corsOptions = {
   }
 };
 
-const apiServer = express();
-apiServer.use(morgan('tiny'));
 if (isDeveloping) {
-  apiServer.use(cors());
+  server.use(cors());
 } else {
-  apiServer.use(cors(corsOptions));
+  server.use(cors(corsOptions));
 }
 
-apiServer.use(compression());
-apiServer.use(express.static(PUBLIC_PATH));
-apiServer.use('/api', apicache('24 hours'), require('./api'));
+server.use('/api', apicache('24 hours'), require('./api'));
+server.get('*', require('./app').serverMiddleware);
 
-apiServer.listen(9000, function onStart (err) {
-  if (err)
+server.listen(port, function onStart(err) {
+  if (err) {
     console.log(err);
-
-  console.info('🙏  API listening on port %s.', 9000);
+  }
+  console.info('📷  @ %s. Wow. Very %s.', port, process.env.NODE_ENV || 'development');
 });

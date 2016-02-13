@@ -22,16 +22,20 @@ module.exports = function directorySerialize (dirTree, requestPath, done) {
         .map(child => {
           return {
             url: `${requestPath}/${directory.name}/${child.image}`,
+            order: parseInt(child.image.slice(0,2), 10),
             dimensions: child.dimensions || {},
             description: child.exif.image.ImageDescription || '',
           }
+        })
+        .sort((left, right) => {
+          return left.order - right.order;
         })
     });
   });
 
   var sortedCereal = cerealizedDirTree.sort((left, right) => {
     if (left.priority && right.priority)
-      return left.priority > right.priority;
+      return left.priority - right.priority;
 
     if (left.date && right.date)
       return new Date(left.date) < new Date(right.date);
