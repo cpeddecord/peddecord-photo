@@ -81,11 +81,7 @@ export default function GalleryCard (props) {
   };
 
   const classNames = halfSize ? 'small-6 medium-3 large-2' : 'small-12 medium-6 large-4';
-  const galleryTypeClassName =   galleryType === 'Portfolio'
-      ? 'hidden'
-      : galleryType === 'blog'
-        ? 'blog'
-        : '';
+  const galleryTypeClassName = galleryType === 'blog' ? 'blog' : '';
 
   return (
     <InlineCss className={`${classNames} gallery-card`} stylesheet={css(halfSize)}>

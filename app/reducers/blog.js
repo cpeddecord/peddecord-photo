@@ -27,7 +27,7 @@ export default function blog(state = {
     case BLOG_FETCHED:
       return assign({}, state, {
         readyState: BLOG_FETCHED,
-        blogPosts: action.payload.results
+        blogPosts: action.payload.results.filter(posts => posts.data.blog.featuredImage)
       });
 
     default:

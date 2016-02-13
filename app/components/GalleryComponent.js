@@ -20,6 +20,7 @@ export default class GalleryComponent extends Component {
       }
       & .content-block{
         margin-bottom: 80px;
+        text-align: center;
       }
     `
   }
@@ -45,7 +46,7 @@ export default class GalleryComponent extends Component {
           <h5 className='gallery-short-lede'>{shortLede}</h5>
         </div>
 
-        <div className='medium-6 medium-offset-3 show-for-medium content-block' dangerouslySetInnerHTML={{__html: content}} />
+        <div className='medium-4 medium-offset-4 show-for-medium content-block' dangerouslySetInnerHTML={{__html: content}} />
 
       </InlineCss>
     )
