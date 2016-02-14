@@ -22,7 +22,7 @@ export default function AboutPage () {
       </div>
 
       <div className='small-12 medium-6 epic-hat'>
-        <img src="http://localhost:9000/epichat.jpg" />
+        <img src="https://prismic-io.s3.amazonaws.com/peddecordphoto%2F6aeed9cc-f9db-4857-8ff3-567619066d96_epichat.jpg" />
       </div>
 
       <div style={bodyTextStyle} className='small-12 medium-6 show-for-small-only'>
