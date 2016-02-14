@@ -21,8 +21,9 @@ const server = express();
 
 global.PUBLIC_PATH = path.resolve(__dirname, 'public');
 
-const accessLogStream = fs.createWriteStream(PUBLIC_PATH + '/access.log', {flags: 'a'})
-const logger = morgan('common', {
+const loggerFormat = ':remote-addr [:date[web]] :method :url :status :res[content-length] :response-time ms'
+const accessLogStream = fs.createWriteStream(PUBLIC_PATH + `/access-${new Date().toISOString().slice(0, 10)}.log`, {flags: 'a'})
+const logger = morgan(loggerFormat, {
   stream: accessLogStream
 });
 
