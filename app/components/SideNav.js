@@ -87,8 +87,31 @@ export default class SideNav extends Component {
     `);
   }
 
+  renderSubSection (sectionType, sectionArr) {
+    return(
+      <ul className='sub-section'>
+        {sectionArr.map((section, i) => {
+          return <Link key={i} to={`/${sectionType}/${section.slug}`} activeClassName='active'>{section.title}</Link>;
+        })}
+      </ul>
+    );
+  }
+
   render() {
     const { showNav, isShowing } = this.props
+    const portfolios = [
+      { title: 'Studio', slug: 'studio' },
+      { title: 'Moving Portraits', slug: 'moving-portraits' },
+      { title: 'Documentary', slug: 'documentary' },
+      { title: 'Live', slug: 'live' }
+    ];
+
+    const works = [
+      { title: 'Odyssey/Sojourn', slug: 'odyssey-sojourn' },
+      { title: 'New Series', slug: 'new-series' },
+      { title: 'Documentary', slug: 'documentary' },
+      { title: 'Aloft', slug: 'aloft-new-dance-project' }
+    ];
 
     return (
       <InlineCss stylesheet={SideNav.css(isShowing)}>
@@ -99,21 +122,12 @@ export default class SideNav extends Component {
 
               <li className='section'>
                 <Link to='/portfolio' activeClassName='active' className='section-heading'>Portfolio</Link>
-                <ul className='sub-section'>
-                  <Link to='/portfolio/studio' activeClassName='active'>Studio</Link>
-                  <Link to='/portfolio/moving-portraits' activeClassName='active'>Moving Portraits</Link>
-                  <Link to='/portfolio/documentary' activeClassName='active'>Documentary</Link>
-                  <Link to='/portfolio/live' activeClassName='active'>Live</Link>
-                </ul>
+                {this.renderSubSection('portfolio', portfolios)}
               </li>
 
               <li className='section'>
                 <Link to='/work' activeClassName='active' className='section-heading'>Work</Link>
-                <ul className='sub-section'>
-                  <Link to='/work/odyssey-sojourn'>Odyssey/Sojourn</Link>
-                  <Link to='/work/new-series'>New Series</Link>
-                  <Link to='/work/aloft-new-dance-project'>Aloft</Link>
-                </ul>
+                {this.renderSubSection('work', works)}
               </li>
 
               <li className='section'>
