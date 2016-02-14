@@ -14,7 +14,6 @@ const config = require('./webpack.config.js');
 const compression = require('compression');
 const morgan = require('morgan');
 const cors = require('cors');
-const FileStreamRotator = require('file-stream-rotator');
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
@@ -22,11 +21,7 @@ const server = express();
 
 global.PUBLIC_PATH = path.resolve(__dirname, 'public');
 
-const accessLogStream = FileStreamRotator.getStream({
-  filename: PUBLIC_PATH + '/access-%DATE%.log',
-  frequency: 'daily',
-  verbose: false
-});
+const accessLogStream = fs.createWriteStream(PUBLIC_PATH + '/access.log', {flags: 'a'})
 const logger = morgan('common', {
   stream: accessLogStream
 });
