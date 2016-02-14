@@ -11,6 +11,9 @@ function stylesheet () {
       margin-top: 30px;
       margin-bottom: 33px;
     }
+    & .small-image-lede {
+      margin-bottom: 10px;
+    }
   `);
 }
 
@@ -49,7 +52,7 @@ export default function BlogPostComponent (props) {
         <h5>{shortLede}</h5>
       </div>
 
-      <div className='show-for-small-only'>
+      <div className='show-for-small-only small-image-lede'>
         <ProgressiveLoadImage {...squareImageProps} />
       </div>
 

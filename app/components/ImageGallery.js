@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import InlineCss from 'react-inline-css';
 import ProgressiveLoadImage from './ProgressiveLoadImage';
 
-function styles () {
+function styles (hideFirstMobile) {
   return (`
     & .vertical-images img {
       margin-top: 25px;
@@ -22,6 +22,10 @@ function styles () {
     & .horizontal-images img:first-child {
       margin-left: 15px;
     }
+
+    & .vertical-images img:first-child {
+      ${hideFirstMobile && 'display: none;'}
+    }
   `);
 }
 
@@ -32,10 +36,11 @@ export default class ImageGallery extends Component {
 
   render () {
     const gallery = this.props.gallery || [];
+    const { hideFirstMobile } = this.props || false;
     if (!gallery.length) return <div />;
 
     return (
-      <InlineCss stylesheet={styles()} >
+      <InlineCss stylesheet={styles(hideFirstMobile)} >
         <div className='vertical-images show-for-small-only'>
           {gallery.map((imgObj, i) => {
             const progProps = {

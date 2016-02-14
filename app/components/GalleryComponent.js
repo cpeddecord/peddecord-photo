@@ -22,6 +22,12 @@ export default class GalleryComponent extends Component {
         margin-bottom: 80px;
         text-align: center;
       }
+      & .content-block-small {
+        margin: 0 15px -16px 15px;
+      }
+      & .image-lede-small {
+        margin: 25px 0;
+      }
     `
   }
 
@@ -32,21 +38,37 @@ export default class GalleryComponent extends Component {
   render() {
     const { lede, shortLede, gallery, content } = this.props;
 
+    const smallLede = gallery[0];
+
+    const progProps = {
+      imgSrc: smallLede.url,
+      alt: smallLede.description,
+      height: smallLede.dimensions.height,
+      width: smallLede.dimensions.width,
+      isVertical: true
+    };
+
     return (
       <InlineCss stylesheet={GalleryComponent.css()}>
         <div className='show-for-small-only gallery-description'>
           <h1 className='gallery-title'>{lede}</h1>
           <h5 className='gallery-short-lede'>{shortLede}</h5>
+
+          <div className='image-lede-small'>
+            <ProgressiveLoadImage {...progProps} />
+          </div>
+
+          <div className='content-block content-block-small' dangerouslySetInnerHTML={{__html: content}} />
         </div>
 
-        <ImageGallery gallery={gallery} />
+        <ImageGallery gallery={gallery} hideFirstMobile={true} />
 
         <div className='show-for-medium gallery-description'>
           <h1 className='gallery-title'>{lede}</h1>
           <h5 className='gallery-short-lede'>{shortLede}</h5>
         </div>
 
-        <div className='medium-4 medium-offset-4 show-for-medium content-block' dangerouslySetInnerHTML={{__html: content}} />
+        <div className='medium-6 medium-offset-3 show-for-medium content-block' dangerouslySetInnerHTML={{__html: content}} />
 
       </InlineCss>
     )
