@@ -14,6 +14,7 @@ const config = require('./webpack.config.js');
 const compression = require('compression');
 const morgan = require('morgan');
 const cors = require('cors');
+const FileStreamRotator = require('file-stream-rotator');
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
@@ -21,9 +22,16 @@ const server = express();
 
 global.PUBLIC_PATH = path.resolve(__dirname, 'public');
 
-server.use(compression());
-server.use(morgan('tiny'));
+const accessLogStream = FileStreamRotator.getStream({
+  filename: PUBLIC_PATH + '/access-%DATE%.log',
+  frequency: 'daily',
+  verbose: false
+});
+const logger = morgan('common', {
+  stream: accessLogStream
+});
 
+server.use(compression());
 
 // Short-circuit the browser's annoying favicon request. You can still
 // specify one as long as it doesn't have this exact name and path.
@@ -91,6 +99,8 @@ if (isDeveloping) {
 }
 
 server.use('/api', apicache('24 hours'), require('./api'));
+
+server.use(logger);
 server.get('*', require('./app').serverMiddleware);
 
 server.listen(port, function onStart(err) {
