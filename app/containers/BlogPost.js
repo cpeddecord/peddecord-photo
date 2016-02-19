@@ -26,8 +26,8 @@ class BlogPost extends Component {
   }
 
   renderBlogPost (blogPostProps) {
-    if (this.props.blog.readyState === BlogActions.GALLERIES_INVALID ||
-      this.props.blog.readyState === BlogActions.GALLERIES_FETCHING) {
+    if (this.props.blog.readyState === BlogActions.BLOG_INVALID ||
+      this.props.blog.readyState === BlogActions.BLOG_FETCHING) {
       return <LoadingIndicator />;
     }
 
@@ -43,7 +43,15 @@ class BlogPost extends Component {
     });
     return (
       <div>
-        <Helmet title={`${blogPostProps.data.blog.lede.value}`} />
+        <Helmet
+          title={`${blogPostProps.data.blog.lede.value}`}
+          meta={[
+            { 'property': 'og:image', 'content': blogPostProps.data.blog.featuredImage.value.main.url },
+            { 'property': 'og:title', 'content': blogPostProps.data.blog.lede.value },
+            { 'property': 'og:description', 'content': blogPostProps.data.blog.shortLede.value },
+            { 'property': 'og:url', 'content': `http://peddecordphoto.com/${this.props.location.pathname}` }
+          ]}
+        />
         {this.renderBlogPost(blogPostProps.data.blog)}
       </div>
     );

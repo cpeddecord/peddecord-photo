@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const router = require('express').Router();
+const isDeveloping = process.env.NODE_ENV !== 'production';
 
 const dirTree = require('./directory-tree');
 const dirCereal = require('./directory-serialize');
@@ -16,8 +17,9 @@ router.get('*/:resource', function (request, response) {
   }
 
   function dirTreeToSerialize (err, payload) {
+    const hostPrefix = isDeveloping ? request.headers.host : 'http://peddecordphoto.com';
     try {
-      dirCereal(payload, `http://${request.headers.host}/${request.params.resource}`, sendRes);
+      dirCereal(payload, `http://${hostPrefix}/${request.params.resource}`, sendRes);
     } catch (e) {
       response.status(400).send('“Here I am, brain the size of a planet and they ask me to take you down to the bridge. Call that job satisfaction? ‘Cos I don’t.”');
     }

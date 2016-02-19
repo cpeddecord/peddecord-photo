@@ -54,7 +54,15 @@ class Gallery extends Component {
 
     return (
       <div>
-        <Helmet title={`${gallery.lede} | ${gallery.galleryType}`} />
+        <Helmet
+          title={`${gallery.lede} | ${gallery.galleryType}`}
+          meta={[
+            { 'property': 'og:image', 'content': gallery.featuredImage.url },
+            { 'property': 'og:title', 'content': gallery.lede },
+            { 'property': 'og:description', 'content': gallery.content },
+            { 'property': 'og:url', 'content': `http://peddecordphoto.com/${this.props.location.pathname}` }
+          ]}
+        />
         <GalleryComponent {...gallery} />
       </div>
     );
