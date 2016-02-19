@@ -22,9 +22,13 @@ function styles (hideFirstMobile) {
     & .horizontal-images img:first-child {
       margin-left: 15px;
     }
-
     & .vertical-images img:first-child {
       ${hideFirstMobile && 'display: none;'}
+    }
+    @media screen and ( min-height: 776px ) {
+      & .horizontal-images {
+        height: 698px;
+      }
     }
   `);
 }
