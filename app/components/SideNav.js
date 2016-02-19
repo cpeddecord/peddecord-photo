@@ -109,7 +109,6 @@ export default class SideNav extends Component {
     const works = [
       { title: 'Odyssey/Sojourn', slug: 'odyssey-sojourn' },
       { title: 'New Series', slug: 'new-series' },
-      { title: 'Documentary', slug: 'documentary' },
       { title: 'Aloft', slug: 'aloft-new-dance-project' }
     ];
 
