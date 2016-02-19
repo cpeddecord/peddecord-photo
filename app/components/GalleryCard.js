@@ -16,10 +16,10 @@ export default function GalleryCard (props) {
       }
       @media (max-width: 639px) {
         &.gallery-card:nth-child(odd) {
-          ${halfSize && 'padding-right: 5px'}
+          ${halfSize ? 'padding-right: 5px' : ''}
         }
         &.gallery-card:nth-child(even) {
-          ${halfSize && 'padding-left: 5px'}
+          ${halfSize ? 'padding-left: 5px' : ''}
         }
         & .blog-short-lede {
           padding: 0 15px;
