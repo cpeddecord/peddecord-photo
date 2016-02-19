@@ -11,6 +11,9 @@ export default function GalleryCard (props) {
         margin-bottom: 25px;
         display: block;
       }
+      &.gallery-card img {
+        width: 100%;
+      }
       @media (max-width: 639px) {
         &.gallery-card:nth-child(odd) {
           ${halfSize && 'padding-right: 5px'}
