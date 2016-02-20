@@ -16,6 +16,12 @@ if (typeof window !== 'undefined' && typeof Typekit !== 'undefined') {
   });
 }
 
+if (typeof window !== 'undefined') {
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-24079899-1', 'auto');
+  ga('send', 'pageview');
+}
+
 class Root extends Component {
 
   renderInitialState() {
@@ -28,7 +34,7 @@ class Root extends Component {
   }
 
   renderConfig() {
-    let innerHtml = `window.CONFIG = ${JSON.stringify(this.props.config)}`;
+    const innerHtml = `window.CONFIG = ${JSON.stringify(this.props.config)}`;
     return (
       <script dangerouslySetInnerHTML={{__html: innerHtml}} />
     );
@@ -66,6 +72,7 @@ class Root extends Component {
           {head.meta.toComponent()}
           {head.link.toComponent()}
           <script src='https://use.typekit.net/suh8dru.js' />
+          <script async src='//www.google-analytics.com/analytics.js' />
           {!isLocal && <link rel='stylesheet' type='text/css' href='/style.min.css' />}
         </head>
         <body>
