@@ -3,8 +3,11 @@ import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import rootReducer from './reducers';
 import { isClient } from './utils';
+import { browserHistory } from 'react-router';
+import { syncHistory } from 'react-router-redux'
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
+const reduxRouterMiddleware = syncHistory(browserHistory);
 
 let createStoreWithMiddleware;
 
@@ -15,11 +18,13 @@ if (isClient && isDeveloping) {
 
   createStoreWithMiddleware = applyMiddleware(
     loggerMiddleware,
-    thunkMiddleware
+    thunkMiddleware,
+    reduxRouterMiddleware
   )(createStore);
 } else {
   createStoreWithMiddleware = applyMiddleware(
-    thunkMiddleware
+    thunkMiddleware,
+    reduxRouterMiddleware
   )(createStore);
 }
 
