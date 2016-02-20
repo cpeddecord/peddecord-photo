@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import InlineCss from 'react-inline-css';
+import { connect } from 'react-redux';
+import analytics from '../utils/analytics';
 
-import renderHamburger from './hamburger';
-import SideNav from './SideNav';
+import renderHamburger from '../components/hamburger';
+import SideNav from '../components/SideNav';
 
-export default class MainNav extends Component {
+class MainNav extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,6 +39,14 @@ export default class MainNav extends Component {
     }, setBodyOverflow);
   }
 
+  componentDidMount() {
+    analytics.create();
+  }
+
+  componentWillReceiveProps(props) {
+    analytics.send('pageview', props.routing.location.pathname);
+  }
+
   render() {
     return (
       <InlineCss stylesheet={MainNav.css()}>
@@ -49,3 +59,11 @@ export default class MainNav extends Component {
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    routing: state.routing
+  };
+}
+
+export default connect(mapStateToProps)(MainNav);

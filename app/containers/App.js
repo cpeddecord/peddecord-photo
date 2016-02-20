@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import Helmet from 'react-helmet';
 import '../scss/App.scss';
 
-import MainNav from '../components/MainNav';
+import MainNav from '../containers/MainNav';
 import Footer from '../components/Footer';
 
 class App extends Component {
