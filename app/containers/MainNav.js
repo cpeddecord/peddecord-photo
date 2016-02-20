@@ -40,7 +40,7 @@ class MainNav extends Component {
   }
 
   componentDidMount() {
-    analytics.create();
+    setTimeout(analytics.create, 0);
   }
 
   componentWillReceiveProps(props) {
