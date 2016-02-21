@@ -16,12 +16,6 @@ if (typeof window !== 'undefined' && typeof Typekit !== 'undefined') {
   });
 }
 
-if (typeof window !== 'undefined') {
-  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-  ga('create', 'UA-24079899-1', 'auto');
-  ga('send', 'pageview');
-}
-
 class Root extends Component {
 
   renderInitialState() {

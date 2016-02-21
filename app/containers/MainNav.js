@@ -40,11 +40,17 @@ class MainNav extends Component {
   }
 
   componentDidMount() {
-    setTimeout(analytics.create, 0);
+    setTimeout(function analyticsNextTick () {
+      if (analytics.enabled) {
+        analytics.create();
+        ga('send', 'pageview');
+      }
+    }, 0);
   }
 
   componentWillReceiveProps(props) {
-    analytics.send('pageview', props.routing.location.pathname);
+    if (analytics.enabled)
+      analytics.send('pageview', props.routing.location.pathname);
   }
 
   render() {
