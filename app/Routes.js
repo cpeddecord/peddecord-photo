@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Route, IndexRoute, Redirect } from 'react-router';
 
 import App from './containers/App';
 import NoMatch from './containers/NoMatch';
@@ -10,25 +10,32 @@ import BlogPost from './containers/BlogPost';
 import LoadingIndicator from './components/LoadingIndicator';
 import AboutPage from './components/AboutPage';
 
+import redirects from './utils/redirects';
+
+const galleryNames = ['work', 'portfolio', 'series'];
+const galleriesWithSlugs = galleryNames
+  .map((gall, i) => {
+    return <Route key={i} path={`/${gall}`} component={Galleries} />
+  })
+  .concat(galleryNames.map((gall, i) => {
+    return <Route key={i + 3} path={`/${gall}/:slug`} component={Gallery} />
+  }));
+
 
 export default (
   <Route path='/' component={App}>
     <IndexRoute component={Galleries} />
 
-    <Route path='/work' component={Galleries} />
-    <Route path='/portfolio' component={Galleries} />
-    <Route path='/series' component={Galleries} />
-
-    <Route path='/work/:slug' component={Gallery} />
-    <Route path='/portfolio/:slug' component={Gallery} />
-    <Route path='/series/:slug' component={Gallery} />
+    {galleriesWithSlugs}
 
     <Route path='/blog' component={BlogsContainer} />
     <Route path='/blog/:slug' component={BlogPost} />
 
-    <Route path='/loading' component={LoadingIndicator} />
-
     <Route path='/about' component={AboutPage} />
+    <Route path='/404' component={NoMatch} />
+
+    {redirects}
+
     <Route path="*" component={NoMatch} />
   </Route>
 );
