@@ -35,8 +35,11 @@ function styles (hideFirstMobile) {
 
 export default class ImageGallery extends Component {
   componentWillReceiveProps () {
-    if (typeof window !== 'undefined')
-      document.getElementsByClassName('horizontal-images')[0].scrollLeft = 0;
+    if (typeof window !== 'undefined') {
+      const sillyDOMstuffPleaseDontJudgeMeWillFixLater = document.getElementsByClassName('horizontal-images')[0];
+      if (sillyDOMstuffPleaseDontJudgeMeWillFixLater)
+        sillyDOMstuffPleaseDontJudgeMeWillFixLater.scrollLeft = 0;
+    }
   }
 
   render () {
