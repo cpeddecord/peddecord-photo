@@ -14,6 +14,8 @@ if (typeof window !== 'undefined' && typeof Typekit !== 'undefined') {
     active: loaderKill,
     inactive: loaderKill
   });
+} else {
+  setTimeout(loaderKill, 500);
 }
 
 class Root extends Component {
