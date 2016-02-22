@@ -8,16 +8,17 @@ function loaderKill () {
   }, 500);
 }
 
-if (typeof window !== 'undefined' && typeof Typekit !== 'undefined') {
-  Typekit.load({
-    async: true,
-    active: loaderKill,
-    inactive: loaderKill
-  });
-} else {
-  setTimeout(loaderKill, 500);
+if (typeof window !== 'undefined') {
+  if (typeof Typekit !== 'undefined') {
+    Typekit.load({
+      async: true,
+      active: loaderKill,
+      inactive: loaderKill
+    });
+  } else {
+    setTimeout(loaderKill, 500);
+  }
 }
-
 class Root extends Component {
 
   renderInitialState() {

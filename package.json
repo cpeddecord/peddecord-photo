@@ -16,7 +16,7 @@
   "scripts": {
     "start": "node server",
     "build": "NODE_ENV=production webpack --config ./webpack.production.config.js --progress --profile --colors",
-    "start:localProd": "NODE_ENV=production PORT=8080 node server",
+    "start:local-prod": "NODE_ENV=production PORT=8080 node server",
     "start:pm2": "NODE_ENV=production PORT=8080 pm2 start server.js --name peddecord-photo",
     "start:pm2:restart": "pm2 restart peddecord-photo"
   },
