@@ -1,10 +1,40 @@
 import React, { Component } from 'react';
 import { isClient } from '../utils';
 
+function onRightClick(event) {
+  const errMessages = [
+    'stop',
+    'please, no',
+    'please, please stop',
+    'quit it',
+    'just, no',
+    'can we please not right now?',
+    'could you not?',
+    'no, really. no.'
+  ];
+  event.preventDefault();
+  console.log(errMessages[Math.floor(Math.random() * errMessages.length)]);
+}
+
 export default class ProgressiveLoadImage extends Component {
   constructor(props) {
     super(props);
     this.state = { isLoading: true };
+  }
+
+  onRightClick (event) {
+    const errMessages = [
+      'stop',
+      'please, no',
+      'please, please stop',
+      'quit it',
+      'just, no',
+      'can we please not right now?',
+      'could you not?',
+      'no, really. no.'
+    ];
+    event.preventDefault();
+    console.log(errMessages[Math.floor(Math.random() * errMessages.length)]);
   }
 
   componentDidMount() {
@@ -44,6 +74,6 @@ export default class ProgressiveLoadImage extends Component {
       transition: 'opacity 0.5s'
     };
 
-    return <img style={style} src={imgSrc} alt={alt} />;
+    return <img onContextMenu={this.onRightClick} style={style} src={imgSrc} alt={alt} />;
   }
 }
