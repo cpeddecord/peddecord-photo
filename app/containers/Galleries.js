@@ -60,7 +60,7 @@ class Galleries extends Component {
   render() {
     return (
       <div>
-        <Helmet title='Portfolio and Work' />
+        <Helmet title='Dance Photography of Portland-based Christopher Peddecord' />
         {this.renderGalleries()}
       </div>
     );

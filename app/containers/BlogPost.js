@@ -49,7 +49,7 @@ class BlogPost extends Component {
             { 'property': 'og:image', 'content': blogPostProps.data.blog.featuredImage.value.main.url },
             { 'property': 'og:title', 'content': blogPostProps.data.blog.lede.value },
             { 'property': 'og:description', 'content': blogPostProps.data.blog.shortLede.value },
-            { 'property': 'og:url', 'content': `http://peddecordphoto.com/${this.props.location.pathname}` }
+            { 'property': 'og:url', 'content': `http://peddecordphoto.com${this.props.location.pathname}` }
           ]}
         />
         {this.renderBlogPost(blogPostProps.data.blog)}

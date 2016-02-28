@@ -52,15 +52,17 @@ class Gallery extends Component {
       return galleryArr.slug === this.props.routeParams.slug;
     });
 
+    const htmlRegex = /<[^>]*>/g;
+
     return (
       <div>
         <Helmet
           title={`${gallery.lede} | ${gallery.galleryType}`}
           meta={[
-            { 'property': 'og:image', 'content': gallery.featuredImage.url },
+            { 'property': 'og:image', 'content': `http://peddecordphoto.com${gallery.gallery[0].url}` },
             { 'property': 'og:title', 'content': gallery.lede },
-            { 'property': 'og:description', 'content': gallery.content },
-            { 'property': 'og:url', 'content': `http://peddecordphoto.com/${this.props.location.pathname}` }
+            { 'property': 'og:description', 'content': gallery.content.replace(htmlRegex, '') },
+            { 'property': 'og:url', 'content': `http://peddecordphoto.com${this.props.location.pathname}` }
           ]}
         />
         <GalleryComponent {...gallery} />
