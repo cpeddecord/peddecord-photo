@@ -1,0 +1,19 @@
+{
+  "name": "peddecord-photo",
+  "version": "2.0.0",
+  "description": "a photo website, I guess",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cpeddecord/peddecord-photo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cpeddecord/peddecord-photo/issues"
+  },
+  "homepage": "https://github.com/cpeddecord/peddecord-photo#readme"
+}
