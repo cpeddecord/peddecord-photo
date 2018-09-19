@@ -1,0 +1,63 @@
+version: 2
+jobs:
+  build_and_test:
+    docker:
+      - image: circleci/node:8
+    working_directory: /app
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: npm run test
+      - run:
+          name: Unit Tests
+          command: npm run test
+  deploy_to_gke:
+    docker:
+      - image: google/cloud-sdk
+    environment:
+      PROJECT_NAME: "photo/app"
+      GOOGLE_PROJECT_ID: "peddecord-photo"
+      GOOGLE_COMPUTE_ZONE: "us-east1-b"
+      GOOGLE_CLUSTER_NAME: "le-cluster"
+    steps:
+      - checkout
+      - run:
+          name: Setup Google Cloud SDK
+          command: |
+            apt-get install -qq -y gettext
+            echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+            gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+            gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
+      - setup_remote_docker
+      - run:
+          name: Docker build/push
+          command: |
+            docker build \
+              --build-arg COMMIT_REF=${CIRCLE_SHA1} \
+              --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` \
+              -t ${PROJECT_NAME} .
+            docker tag ${PROJECT_NAME} eu.gcr.io/${GOOGLE_PROJECT_ID}/${PROJECT_NAME}:${CIRCLE_SHA1}
+            gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://eu.gcr.io
+            docker push eu.gcr.io/${GOOGLE_PROJECT_ID}/${PROJECT_NAME}:${CIRCLE_SHA1}
+      - run:
+          name: Poke the Kube
+          command: |
+            envsubst < ${HOME}/project/kube.yml > ${HOME}/patched_kube.yml
+            kubectl apply -f ${HOME}/patched_kube.yml
+            kubectl rollout status deployment/${PROJECT_NAME}
+
+workflows:
+  version: 2
+  frontend_deploy:
+    jobs:
+      - build_and_test
+
+      - deploy_to_gke:
+          requires:
+            - build_and_test
+          filters:
+            branches:
+              only: master
