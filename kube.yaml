@@ -1,7 +1,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: ${PROJECT_NAME}
+  name: ${PROJECT_NAME}-lb
 spec:
   selector:
     app: ${PROJECT_NAME}
@@ -15,7 +15,7 @@ spec:
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: ${PROJECT_NAME}-lb
+  name: ${PROJECT_NAME}
   labels:
     app: ${PROJECT_NAME}
 spec:
