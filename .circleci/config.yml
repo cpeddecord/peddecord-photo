@@ -16,7 +16,7 @@ jobs:
     docker:
       - image: google/cloud-sdk
     environment:
-      PROJECT_NAME: "photo-app"
+      PROJECT_NAME: "node-app"
       GOOGLE_PROJECT_ID: "peddecord-photo"
       GOOGLE_COMPUTE_ZONE: "us-east1-b"
       GOOGLE_CLUSTER_NAME: "le-cluster"
