@@ -45,8 +45,8 @@ jobs:
       - run:
           name: Poke the Kube
           command: |
-            envsubst < ${HOME}/project/kube.yml > ${HOME}/patched_kube.yml
-            kubectl apply -f ${HOME}/patched_kube.yml
+            envsubst < ${HOME}/project/kube.yaml > ${HOME}/patched_kube.yaml
+            kubectl apply -f ${HOME}/patched_kube.yaml
             kubectl rollout status deployment/${PROJECT_NAME}
 
 workflows:
