@@ -1,0 +1,3 @@
+# Peddecord Photo
+
+Hopping on the TypeScript bandwagon...
