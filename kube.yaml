@@ -17,7 +17,17 @@ spec:
       containers:
         - name: ${PROJECT_NAME}
           image: gcr.io/${GOOGLE_PROJECT_ID}/${PROJECT_NAME}:${CIRCLE_SHA1}
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+              httpHeaders:
+              - name: X-Custom-Header
+                value: YouOkay
+            initialDelaySeconds: 10
+            periodSeconds: 30
           ports:
             - name: http
               containerPort: 3000
               protocol: TCP
+              
