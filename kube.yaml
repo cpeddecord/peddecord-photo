@@ -23,5 +23,5 @@ spec:
               protocol: TCP
           env:
             - name: "DO_REDIRECTS"
-              value: true
+              value: "yes please do them this is JS and this is true"
               
