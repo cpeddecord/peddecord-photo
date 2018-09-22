@@ -1,6 +1,8 @@
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
 
+const now = require('performance-now');
+
 const DO_REDIRECTS = process.env.DO_REDIRECTS || false;
 
 const HOST_HEADER = 'host';
@@ -46,7 +48,26 @@ async function redirect(ctx, next) {
   }
 }
 
+// TODO: get some bunyan up in hrrr
+async function logger(ctx, next) {
+  console.log('request start', {
+    method: ctx.method,
+    url: ctx.url,
+  });
+
+  const start = now();
+
+  await next();
+
+  console.log('request end', {
+    method: ctx.method,
+    url: ctx.url,
+    duration: now() - start,
+  });
+}
+
 app
+  .use(logger)
   .use(redirect)
   .use(router.routes())
   .use(router.allowedMethods())
