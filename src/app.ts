@@ -5,6 +5,7 @@ const DO_REDIRECTS = process.env.DO_REDIRECTS || false;
 
 const HOST_HEADER = 'host';
 const PROTOCOL_HEADER = 'x-forwarded-proto';
+const HEALTH_HEADER = 'x-healthz';
 
 const app = new Koa();
 const router = new Router();
@@ -28,7 +29,8 @@ router.get(
 );
 
 async function redirect(ctx, next) {
-  if (!DO_REDIRECTS) {
+  const healthHeader = ctx.headers[HEALTH_HEADER];
+  if (!DO_REDIRECTS || healthHeader) {
     return next();
   }
 

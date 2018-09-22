@@ -24,4 +24,13 @@ spec:
           env:
             - name: "DO_REDIRECTS"
               value: "yes please do them this is JS and this is true"
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+              httpHeaders:
+              - name: x-healthz
+                value: yeh
+            initialDelaySeconds: 3
+            periodSeconds: 3
               
