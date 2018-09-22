@@ -8,6 +8,7 @@ const DO_REDIRECTS = process.env.DO_REDIRECTS || false;
 const HOST_HEADER = 'host';
 const PROTOCOL_HEADER = 'x-forwarded-proto';
 const HEALTH_HEADER = 'x-healthz';
+const TRACE_HEADER = 'x-cloud-trace-context';
 
 const app = new Koa();
 const router = new Router();
@@ -50,7 +51,9 @@ async function redirect(ctx, next) {
 
 // TODO: get some bunyan up in hrrr
 async function logger(ctx, next) {
+  const trace = ctx.headers[TRACE_HEADER];
   console.log('request start', {
+    trace,
     method: ctx.method,
     url: ctx.url,
   });
@@ -60,8 +63,10 @@ async function logger(ctx, next) {
   await next();
 
   console.log('request end', {
+    trace,
     method: ctx.method,
     url: ctx.url,
+    status: ctx.status,
     duration: now() - start,
   });
 }
