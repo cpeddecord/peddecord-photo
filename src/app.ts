@@ -8,7 +8,7 @@ const DO_REDIRECTS = process.env.DO_REDIRECTS || false;
 const HOST_HEADER = 'host';
 const PROTOCOL_HEADER = 'x-forwarded-proto';
 const HEALTH_HEADER = 'x-healthz';
-const TRACE_HEADER = 'x-cloud-trace-context';
+const TRACE_HEADER = 'X-Cloud-Trace-Context';
 
 const app = new Koa();
 const router = new Router();
@@ -32,14 +32,15 @@ router.get(
 );
 
 async function redirect(ctx, next) {
+  const path = ctx.path;
   const healthHeader = ctx.headers[HEALTH_HEADER];
-  if (!DO_REDIRECTS || healthHeader) {
+
+  if (!DO_REDIRECTS || healthHeader || path.includes('healthz')) {
     return next();
   }
 
   const host = ctx.headers[HOST_HEADER];
   const protocol = ctx.headers[PROTOCOL_HEADER];
-  const path = ctx.path;
 
   if (!host.includes('www.') || protocol !== 'https') {
     ctx.status = 301;
