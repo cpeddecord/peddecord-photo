@@ -21,6 +21,11 @@ spec:
             - name: http
               containerPort: 3000
               protocol: TCP
+          resources:
+            requests:
+              memory: "409M"
+              limits:
+                memory: "512M"
           env:
             - name: "DO_REDIRECTS"
               value: "yes please do them this is JS and this is true"
