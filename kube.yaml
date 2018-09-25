@@ -24,8 +24,8 @@ spec:
           resources:
             requests:
               memory: "409M"
-              limits:
-                memory: "512M"
+            limits:
+              memory: "512M"
           env:
             - name: "DO_REDIRECTS"
               value: "yes please do them this is JS and this is true"
