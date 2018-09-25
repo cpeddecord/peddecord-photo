@@ -1,5 +1,6 @@
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
+import * as bunyan from 'bunyan';
 
 const now = require('performance-now');
 
@@ -12,6 +13,10 @@ const TRACE_HEADER = 'X-Cloud-Trace-Context';
 
 const app = new Koa();
 const router = new Router();
+
+const logger = bunyan.createLogger({
+  name: 'node-app',
+});
 
 const temporaryTemplate = (s: string): string => {
   return `<!DOCTYPE html><html><head><meta name="google-site-verification" content="LIA0G4bJQIQGiM8VX3vHKIJf_yRMiG8TQqQKRPkkJ2g" /></head><body>hello world: ${s}</body></html>`;
@@ -50,33 +55,33 @@ async function redirect(ctx, next) {
   }
 }
 
-// TODO: get some bunyan up in hrrr
-async function logger(ctx, next) {
-  const trace = ctx.headers[TRACE_HEADER];
-  console.log('request start', {
-    trace,
-    method: ctx.method,
-    url: ctx.url,
-  });
+async function requestLogger(ctx, next) {
+  if (ctx.path.includes('healthz')) return next();
 
   const start = now();
+  const trace = ctx.headers[TRACE_HEADER];
+
+  const requestLogger = logger.child({
+    url: ctx.url,
+    method: ctx.method,
+    trace,
+  });
+
+  ctx.logger = requestLogger;
 
   await next();
 
-  console.log('request end', {
-    trace,
-    method: ctx.method,
-    url: ctx.url,
+  ctx.logger.info('request end', {
     status: ctx.status,
     duration: now() - start,
   });
 }
 
 app
-  .use(logger)
+  .use(requestLogger)
   .use(redirect)
   .use(router.routes())
   .use(router.allowedMethods())
   .listen(3000);
 
-console.log('Koa at 3000');
+logger.info('Koa at 3000');

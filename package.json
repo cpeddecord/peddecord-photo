@@ -7,7 +7,8 @@
     "start": "node ./lib/app.js",
     "tsc": "tsc",
     "tsc:watch": "tsc -w",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "docker:minikube": "eval $(minikube docker-env) && docker build . --tag mk-node-app && docker tag mk-node-app localhost:5000/mk-node-app:latest"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
     "typescript-eslint-parser": "^18.0.0"
   },
   "dependencies": {
+    "bunyan": "^1.8.12",
     "koa": "^2.5.3",
     "koa-router": "^7.4.0",
     "performance-now": "^2.1.0"
