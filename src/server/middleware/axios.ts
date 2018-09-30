@@ -7,7 +7,7 @@ const API_PUBLIC_ADDRESS = 'https://www.peddecord.photo/api/v1';
 // TODO: make extensible for more addresses...
 function getApiAddress() {
   if (
-    typeof document !== 'undefined' &&
+    typeof document === 'undefined' &&
     process.env.API_V1_NODEPORT_SERVICE_HOST &&
     process.env.API_V1_NODEPORT_SERVICE_PORT
   ) {
