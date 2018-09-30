@@ -13,7 +13,7 @@ function getApiAddress() {
   ) {
     return `http://${process.env.API_V1_NODEPORT_SERVICE_HOST}:${
       process.env.API_V1_NODEPORT_SERVICE_PORT
-    }`;
+    }/api/v1`;
   }
 
   return API_PUBLIC_ADDRESS;
