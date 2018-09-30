@@ -64,6 +64,7 @@ async function requestLogger(ctx, next) {
   const requestLogger = logger.child({
     url: ctx.url,
     method: ctx.method,
+    headers: ctx.headers,
     trace,
   });
 
@@ -71,10 +72,13 @@ async function requestLogger(ctx, next) {
 
   await next();
 
-  ctx.logger.info('request end', {
-    status: ctx.status,
-    duration: now() - start,
-  });
+  ctx.logger.info(
+    {
+      status: ctx.status,
+      duration: now() - start,
+    },
+    'request end'
+  );
 }
 
 app

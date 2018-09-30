@@ -5,7 +5,7 @@ metadata:
   labels:
     app: ${PROJECT_NAME}
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: ${PROJECT_NAME}
@@ -23,9 +23,9 @@ spec:
               protocol: TCP
           resources:
             requests:
-              memory: "409M"
+              memory: "203M"
             limits:
-              memory: "512M"
+              memory: "256M"
           env:
             - name: "DO_REDIRECTS"
               value: "yes please do them this is JS and this is true"
@@ -37,5 +37,5 @@ spec:
               - name: x-healthz
                 value: yeh
             initialDelaySeconds: 3
-            periodSeconds: 3
+            periodSeconds: 60
               

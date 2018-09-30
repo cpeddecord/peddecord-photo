@@ -16,6 +16,7 @@ RUN npm prune --production
 FROM node:8-alpine
 ENV NODE_ENV=production
 ARG BUILD_DATE
+ARG MEMORY_SIZE
 ENV COMMIT_REF=${COMMIT_REF} \
   BUILD_DATE=${BUILD_DATE}
 
@@ -24,4 +25,4 @@ COPY --from=builder /var/www/lib ./lib
 COPY --from=builder /var/www/node_modules ./node_modules
 EXPOSE 3000
 
-CMD ["node", "lib/app.js", "--max-old-space-size=", "408"]
+CMD ["node", "lib/app.js", "--max-old-space-size=", MEMORY_SIZE]
