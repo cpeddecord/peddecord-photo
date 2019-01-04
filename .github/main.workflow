@@ -3,7 +3,13 @@ workflow "Build and Test" {
   resolves = ["GitHub Action for npm"]
 }
 
+action "GitHub Action for npm-1" {
+  uses = "actions/npm@e7aaefe"
+  args = "install"
+}
+
 action "GitHub Action for npm" {
   uses = "actions/npm@e7aaefe"
-  runs = "test"
+  needs = ["GitHub Action for npm-1"]
+  args = "test"
 }
